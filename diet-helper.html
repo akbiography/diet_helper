@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Контроль харчування</title>
+  <style>
+    body {
+      background-color: #E6F2E6;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #336633;
+    }
+
+    .tab {
+      background-color: #C2E0C6;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .tab-button {
+      background-color: #99CC99;
+      color: #FFFFFF;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .tab-button.active {
+      background-color: #336633;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .recipe-item {
+      background-color: #FFFFFF;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .journal-item {
+      background-color: #FFFFFF;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      background-color: #336633;
+      color: #FFFFFF;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function switchTab(evt, tabName) {
+      var i, tabContent, tabButtons;
+
+      tabContent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+      }
+
+      tabButtons = document.getElementsByClassName("tab-button");
+      for (i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+    }
+
+    // Функціональність для додавання рецептів від користувача
+    function addCustomRecipe() {
+      var recipeName = prompt("Введіть назву рецепту");
+      var calories = prompt("Введіть калорійність рецепту (у ккал)");
+      var description = prompt("Введіть опис приготування рецепту");
+      var dietType = prompt("Введіть вид дієти");
+
+      var recipeItem = document.createElement("div");
+      recipeItem.classList.add("recipe-item");
+
+      var recipeTitle = document.createElement("h3");
+      recipeTitle.textContent = recipeName;
+
+      var recipeCalories = document.createElement("p");
+      recipeCalories.textContent = "Калорії: " + calories + " ккал";
+
+      var recipeDescription = document.createElement("p");
+      recipeDescription.textContent = description;
+
+      var recipeDietType = document.createElement("p");
+      recipeDietType.textContent = "Вид дієти: " + dietType;
+
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Видалити рецепт";
+      deleteButton.classList.add("btn");
+      deleteButton.onclick = function() {
+        recipeItem.remove();
+      };
+
+      recipeItem.appendChild(recipeTitle);
+      recipeItem.appendChild(recipeCalories);
+      recipeItem.appendChild(recipeDescription);
+      recipeItem.appendChild(recipeDietType);
+      recipeItem.appendChild(deleteButton);
+
+      document.getElementById("recipes").appendChild(recipeItem);
+    }
+  </script>
+</head>
+<body>
+  <h1>Контроль харчування</h1>
+
+  <div class="tab">
+    <button class="tab-button active" onclick="switchTab(event, 'recipes')">Рецепти</button>
+    <button class="tab-button" onclick="switchTab(event, 'journal')">Щоденний журнал</button>
+  </div>
+
+  <div id="recipes" class="tab-content active">
+    <!-- Код для відображення рецептів -->
+    <div class="recipe-item">
+      <h3>Салат з квіткою капусти</h3>
+      <p>Калорії: 150 ккал</p>
+      <p>Опис: Суміш свіжої квітки капусти, моркви, огірка та соусу на основі оливкової олії. Зберігайте в холодильнику і подавайте охолодженим.</p>
+      <p>Вид дієти: Вегетаріанська</p>
+      <button class="btn" onclick="this.parentElement.remove()">Видалити рецепт</button>
+    </div>
+    <!-- Додайте решту рецептів тут -->
+
+    <!-- Рецепт 1 -->
+    <div class="recipe-item">
+      <h3>Омлет</h3>
+      <p>Калорії: 200 ккал</p>
+      <p>Опис: Збиті яйця з додаванням молока та солі, смажені на сковороді до золотистого кольору.</p>
+      <p>Вид дієти: Здорове харчування</p>
+      <button class="btn" onclick="this.parentElement.remove()">Видалити рецепт</button>
+    </div>
+
+    <!-- Рецепт 2 -->
+    <div class="recipe-item">
+      <h3>Овочеве рагу</h3>
+      <p>Калорії: 250 ккал</p>
+      <p>Опис: Суміш свіжих овочів (баклажанів, кабачків, перцю, цибулі) тушкуються на сковороді з додаванням томатного соусу та приправ до готовності.</p>
+      <p>Вид дієти: Веганська</p>
+      <button class="btn" onclick="this.parentElement.remove()">Видалити рецепт</button>
+    </div>
+
+    <!-- Додайте решту рецептів тут -->
+  </div>
+
+  <div id="journal" class="tab-content">
+    <!-- Код для відображення журналу -->
+    <div class="journal-item">
+      <h3>Сніданок</h3>
+      <p>Калорії: 300 ккал</p>
+      <p>Їжа: Яйця з беконом</p>
+      <button class="btn" onclick="this.parentElement.remove()">Видалити запис</button>
+    </div>
+    <!-- Додайте решту записів журналу тут -->
+  </div>
+
+  <div class="form-group">
+    <button class="btn" onclick="addCustomRecipe()">Додати власний рецепт</button>
+  </div>
+</body>
+</html>
